@@ -5,6 +5,7 @@
     <title>Gameroom Server of Friends - soul-stone</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+
     <style>
         /* === GENERAL === */
 
@@ -336,12 +337,12 @@ a {
 }
 
 .pre {
-    background-color: #2f3136;
+    background-color: #2f3136 !important;
 }
 
 .pre--multiline {
-    border-color: #282b30;
-    color: #839496;
+    border-color: #282b30 !important;
+    color: #839496 !important;
 }
 
 .mention {
@@ -421,12 +422,22 @@ a {
     color: rgba(255, 255, 255, 0.3);
 }
     </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
 </head>
 <body>
     
 <div class="info">
     <div class="info__guild-icon-container">
-        <img class="info__guild-icon" src="https://cdn.discordapp.com/icons/269812107355226122/dd325e2274915ef039156e804a3b31f5.png" />
+        <img class="info__guild-icon" src="https://cdn.discordapp.com/icons/269812107355226122/a_f10b9bc882749f647caf9ea4205c450c.png" />
     </div>
     <div class="info__metadata">
         <div class="info__guild-name">Gameroom Server of Friends</div>
@@ -442,7 +453,7 @@ a {
 <div class="chatlog">
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4f1a03aea33e3829d564d5c41bca6e34.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
@@ -459,10 +470,10 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/137630525509730304/9e24ef2497ed57aa450664d851afd13d.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/137630525509730304/cca3a093d8ab59ca5c5f6177da06e6af.png" />
             </div>            
             <div class="chatlog__messages">
-                <span class="chatlog__author-name" title="Comma#6440">Comma</span>
+                <span class="chatlog__author-name" title="Phantom Knight#6440">Phantom Knight</span>
                 <span class="chatlog__timestamp">23-Feb-19 10:15 PM</span>
 
                         <div class="chatlog__content">
@@ -476,7 +487,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/265da43d249a580fed1cabb54ab8a111.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
@@ -493,7 +504,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/0b140d933f6528edb26852cfde410421.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
@@ -527,7 +538,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/0554bedf53412c8c47139190e9ad15cd.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
@@ -551,7 +562,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/0b140d933f6528edb26852cfde410421.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
@@ -585,7 +596,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/0554bedf53412c8c47139190e9ad15cd.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
@@ -602,7 +613,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/0b140d933f6528edb26852cfde410421.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
@@ -649,7 +660,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/0554bedf53412c8c47139190e9ad15cd.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
@@ -666,7 +677,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/0b140d933f6528edb26852cfde410421.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
@@ -700,7 +711,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/0554bedf53412c8c47139190e9ad15cd.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
@@ -725,7 +736,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/efb15370411395a7f915e31ee2662b15.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Anska#5126">Anska</span>
@@ -763,7 +774,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/0b140d933f6528edb26852cfde410421.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
@@ -788,7 +799,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/0554bedf53412c8c47139190e9ad15cd.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
@@ -822,7 +833,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/efb15370411395a7f915e31ee2662b15.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Anska#5126">Anska</span>
@@ -846,7 +857,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/0554bedf53412c8c47139190e9ad15cd.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
@@ -887,7 +898,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/efb15370411395a7f915e31ee2662b15.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Anska#5126">Anska</span>
@@ -928,7 +939,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/efb15370411395a7f915e31ee2662b15.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Anska#5126">Anska</span>
@@ -945,7 +956,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/265da43d249a580fed1cabb54ab8a111.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
@@ -962,7 +973,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4f1a03aea33e3829d564d5c41bca6e34.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
@@ -979,7 +990,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/0b140d933f6528edb26852cfde410421.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
@@ -996,7 +1007,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/efb15370411395a7f915e31ee2662b15.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Anska#5126">Anska</span>
@@ -1041,7 +1052,7 @@ a {
                 <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/423974247203864577/9b3908067799d6f55f57ae8be38672bd.png" />
             </div>            
             <div class="chatlog__messages">
-                <span class="chatlog__author-name" title="olly_the_wally01#7506">olly_the_wally01</span>
+                <span class="chatlog__author-name" title="OllyTheWally01#7506">OllyTheWally01</span>
                 <span class="chatlog__timestamp">01-Apr-19 03:57 PM</span>
 
                         <div class="chatlog__content">
@@ -1055,7 +1066,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -1072,7 +1083,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/efb15370411395a7f915e31ee2662b15.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Anska#5126">Anska</span>
@@ -1096,7 +1107,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/0b140d933f6528edb26852cfde410421.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
@@ -1113,7 +1124,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/265da43d249a580fed1cabb54ab8a111.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
@@ -1137,7 +1148,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/0554bedf53412c8c47139190e9ad15cd.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
@@ -1177,7 +1188,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/265da43d249a580fed1cabb54ab8a111.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
@@ -1201,7 +1212,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/0554bedf53412c8c47139190e9ad15cd.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
@@ -1218,7 +1229,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/265da43d249a580fed1cabb54ab8a111.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
@@ -1242,7 +1253,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/efb15370411395a7f915e31ee2662b15.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Anska#5126">Anska</span>
@@ -1259,7 +1270,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -1282,7 +1293,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/efb15370411395a7f915e31ee2662b15.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Anska#5126">Anska</span>
@@ -1305,7 +1316,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/f602baabd8d077ffec214c37e37816f8.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
@@ -1339,7 +1350,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/efb15370411395a7f915e31ee2662b15.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Anska#5126">Anska</span>
@@ -1373,7 +1384,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/efb15370411395a7f915e31ee2662b15.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Anska#5126">Anska</span>
@@ -1390,7 +1401,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -1414,7 +1425,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/efb15370411395a7f915e31ee2662b15.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Anska#5126">Anska</span>
@@ -1431,7 +1442,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -1465,7 +1476,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -1535,7 +1546,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4f1a03aea33e3829d564d5c41bca6e34.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
@@ -1552,7 +1563,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/265da43d249a580fed1cabb54ab8a111.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
@@ -1569,7 +1580,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4f1a03aea33e3829d564d5c41bca6e34.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
@@ -1610,7 +1621,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/0554bedf53412c8c47139190e9ad15cd.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
@@ -1656,7 +1667,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/249221224192802818/81aefeeef5a08555e8e1799228f64ea7.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/249221224192802818/fac2cb2c171673e1961842d1f04aed13.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="hengie#3966">hengie</span>
@@ -1680,7 +1691,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -1703,7 +1714,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/249221224192802818/81aefeeef5a08555e8e1799228f64ea7.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/249221224192802818/fac2cb2c171673e1961842d1f04aed13.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="hengie#3966">hengie</span>
@@ -1720,7 +1731,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/265da43d249a580fed1cabb54ab8a111.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
@@ -1744,7 +1755,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/249221224192802818/81aefeeef5a08555e8e1799228f64ea7.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/249221224192802818/fac2cb2c171673e1961842d1f04aed13.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="hengie#3966">hengie</span>
@@ -1761,7 +1772,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/265da43d249a580fed1cabb54ab8a111.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
@@ -1778,7 +1789,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/249221224192802818/81aefeeef5a08555e8e1799228f64ea7.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/249221224192802818/fac2cb2c171673e1961842d1f04aed13.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="hengie#3966">hengie</span>
@@ -1795,7 +1806,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -1829,7 +1840,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4f1a03aea33e3829d564d5c41bca6e34.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
@@ -1853,7 +1864,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -1870,7 +1881,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/0554bedf53412c8c47139190e9ad15cd.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
@@ -1917,7 +1928,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -1934,7 +1945,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/265da43d249a580fed1cabb54ab8a111.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
@@ -1976,7 +1987,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/f602baabd8d077ffec214c37e37816f8.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
@@ -2011,7 +2022,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/0554bedf53412c8c47139190e9ad15cd.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
@@ -2028,7 +2039,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -2052,7 +2063,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/265da43d249a580fed1cabb54ab8a111.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
@@ -2069,7 +2080,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -2103,7 +2114,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/265da43d249a580fed1cabb54ab8a111.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
@@ -2137,7 +2148,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -2161,7 +2172,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/265da43d249a580fed1cabb54ab8a111.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
@@ -2179,7 +2190,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -2196,7 +2207,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/0554bedf53412c8c47139190e9ad15cd.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
@@ -2213,7 +2224,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/265da43d249a580fed1cabb54ab8a111.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
@@ -2230,7 +2241,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -2247,7 +2258,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/0b140d933f6528edb26852cfde410421.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
@@ -2278,7 +2289,7 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/686764a699af5cc797262890f6db75c1.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
             </div>            
             <div class="chatlog__messages">
                 <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
@@ -2320,10 +2331,10 @@ a {
         </div>
         <div class="chatlog__message-group">
             <div class="chatlog__author-avatar-container">
-                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/137630525509730304/9e24ef2497ed57aa450664d851afd13d.png" />
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/137630525509730304/cca3a093d8ab59ca5c5f6177da06e6af.png" />
             </div>            
             <div class="chatlog__messages">
-                <span class="chatlog__author-name" title="Comma#6440">Comma</span>
+                <span class="chatlog__author-name" title="Phantom Knight#6440">Phantom Knight</span>
                 <span class="chatlog__timestamp">01-Apr-19 04:52 PM</span>
 
                         <div class="chatlog__content">

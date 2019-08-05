@@ -1,0 +1,2514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Gameroom Server of Friends - comic-chat</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <style>
+        /* === GENERAL === */
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, Monospace;
+}
+
+.pre--multiline {
+    margin-top: 4px;
+    padding: 8px;
+    border: 2px solid;
+    border-radius: 5px;    
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+}
+
+.mention {
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.45em;
+    height: 1.45em;
+    margin: 0 1px;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1rem;
+    height: 1rem;
+}
+
+.emoji--large {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* === INFO === */
+
+.info {
+    display: flex;
+    max-width: 100%;
+    margin: 0 5px 10px 5px;    
+}
+
+.info__guild-icon-container {
+    flex: 0;
+}
+
+.info__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.info__metadata {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.info__guild-name {
+    font-size: 1.4em;
+}
+
+.info__channel-name {
+    font-size: 1.2em;
+}
+
+.info__channel-topic {
+    margin-top: 2px;
+}
+
+.info__channel-message-count {
+    margin-top: 2px;
+}
+
+.info__channel-date-range {
+    margin-top: 2px;
+}
+
+/* === CHATLOG === */
+
+.chatlog {
+    max-width: 100%;
+    margin-bottom: 24px;
+}
+
+.chatlog__message-group {
+    display: flex;
+    margin: 0 10px;
+    padding: 15px 0;
+    border-top: 1px solid;
+}
+
+.chatlog__author-avatar-container {
+    flex: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    flex: 1;
+    min-width: 50%;
+    margin-left: 20px;
+}
+
+.chatlog__author-name {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 5px;
+    font-size: .75em;
+}
+
+.chatlog__content {
+    padding-top: 5px;
+    font-size: .9375em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 3px;
+    font-size: .8em;
+}
+
+.chatlog__attachment {
+    margin: 5px 0;
+}
+
+.chatlog__attachment-thumbnail {
+    max-width: 50%;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    max-width: 520px;
+    margin-top: 5px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 4px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    width: 100%;
+    display: flex;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.chatlog__embed-author-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 9px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 10px;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-size: .875em;
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 20px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 10px;
+}
+
+.chatlog__embed-image {    
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 10px;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-weight: 600;
+    font-size: .75em;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 6px 2px 2px 2px;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 6px;
+    font-size: .875em;
+}
+    </style>
+    <style>
+        /* === GENERAL === */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #839496 !important;
+}
+
+.mention {
+    color: #7289da;
+}
+
+/* === INFO === */
+
+.info__guild-name {
+    color: #ffffff;
+}
+
+.info__channel-name {
+    color: #ffffff;
+}
+
+.info__channel-topic {
+    color: #ffffff;
+}
+
+/* === CHATLOG === */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</head>
+<body>
+    
+<div class="info">
+    <div class="info__guild-icon-container">
+        <img class="info__guild-icon" src="https://cdn.discordapp.com/icons/269812107355226122/a_f10b9bc882749f647caf9ea4205c450c.png" />
+    </div>
+    <div class="info__metadata">
+        <div class="info__guild-name">Gameroom Server of Friends</div>
+        <div class="info__channel-name">comic-chat</div>
+        
+            <div class="info__channel-topic">No NSFW please.</div>
+
+        <div class="info__channel-message-count">122 messages</div>
+        
+    </div>
+</div>
+
+<div class="chatlog">
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">13-May-18 02:04 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://cdn.discordapp.com/attachments/195214576571121664/443138004794474526/RCO118_1466535800.jpg">https://cdn.discordapp.com/attachments/195214576571121664/443138004794474526/RCO118_1466535800.jpg</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://cdn.discordapp.com/attachments/195214576571121664/443138004794474526/RCO118_1466535800.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://cdn.discordapp.com/attachments/195214576571121664/443138004794474526/RCO118_1466535800.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">13-May-18 02:30 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Goes in <span class="mention">#manga-and-anime</span></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">13-May-18 02:30 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">not comic either</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">13-May-18 02:31 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">manga is the  same as comics</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">only read from right to left</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">13-May-18 02:32 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">and updated</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">13-May-18 02:33 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">good because you ahould not make things so vague</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/272496312115527680/d9135a28af1635d10781c7abf2aeb6aa.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="&#119868;&#120001;&#120001;&#120007;&#119990;#2170">&#119868;&#120001;&#120001;&#120007;&#119990;</span>
+                <span class="chatlog__timestamp">17-Sep-18 01:21 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Ded channel</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/137630525509730304/cca3a093d8ab59ca5c5f6177da06e6af.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Phantom Knight#6440">Phantom Knight</span>
+                <span class="chatlog__timestamp">17-Sep-18 04:39 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">yup</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">17-Sep-18 05:15 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i suggested putting it in anime and manga but people said no</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">17-Sep-18 05:17 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">what happend to the long convo about spider gwen</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">17-Sep-18 05:17 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">umm. im not sure actualy</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i rmeber that</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">but i dont see it</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">ive not removed it</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">nor has it been removed</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">17-Sep-18 05:18 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">yep</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
+                <span class="chatlog__timestamp">29-Oct-18 10:24 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">FUCKING SUPER HEROES YEA</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/272496312115527680/d9135a28af1635d10781c7abf2aeb6aa.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="&#119868;&#120001;&#120001;&#120007;&#119990;#2170">&#119868;&#120001;&#120001;&#120007;&#119990;</span>
+                <span class="chatlog__timestamp">29-Oct-18 10:27 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><em>down syndrome voice</em> I am spooderman</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Ded chat btw</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">29-Oct-18 10:45 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Spooker heroes <img class="emoji " alt="👻" title="👻" src="https://twemoji.maxcdn.com/2/72x72/1f47b.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">10-Nov-18 08:48 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.youtube.com/watch?v=zNv9xWxFX7E">https://www.youtube.com/watch?v=zNv9xWxFX7E</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/user/dorkly">Dorkly</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=zNv9xWxFX7E"><span class="markdown">How Marvel Zombies Gave us the Purest Version of Spider-Man</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">It took Spider-Man being undead to show us how he truly lives. See more <a href="http://www.dorkly.com">http://www.dorkly.com</a> Geek out with us... FACEBOOK: <a href="http://www.facebook.com/dorkly">http://www.facebook.com/dorkly</a> TW...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/zNv9xWxFX7E/maxresdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/zNv9xWxFX7E/maxresdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">10-Nov-18 09:44 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.youtube.com/watch?v=J_njwde2dJI">https://www.youtube.com/watch?v=J_njwde2dJI</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/user/comicstorian">Comicstorian</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=J_njwde2dJI"><span class="markdown">Deadpool meets his Zombie Head.... Zombiepool Continues! - Complet...</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Deadpool needs to meet his own Zombie Head and go on an adventure with his own head... this isnt weird at all. Click here to buy a copy of the original book....</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/J_njwde2dJI/maxresdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/J_njwde2dJI/maxresdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">09-Jan-19 08:02 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">the jango fett comic is coming out. finally some content on him</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">09-Jan-19 08:28 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">finished reading the jango fett comic <span class="mention" title="DDale1357#3271">@DDale1357</span> and its good</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">09-Jan-19 08:39 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Is that part of the Age of the Republic?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">10-Jan-19 10:34 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">yep</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/137630525509730304/cca3a093d8ab59ca5c5f6177da06e6af.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Phantom Knight#6440">Phantom Knight</span>
+                <span class="chatlog__timestamp">10-Jan-19 10:11 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://twitter.com/Marvel/status/1083483571376005120">https://twitter.com/Marvel/status/1083483571376005120</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+                                                    <img class="chatlog__embed-author-icon" src="https://pbs.twimg.com/profile_images/573984336271122432/k8vEBoCW_bigger.jpeg" />
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://twitter.com/Marvel">Marvel Entertainment (@Marvel)</a>
+                                                    </span>
+                                            </div>
+
+
+                                        <div class="chatlog__embed-description"><span class="markdown">50 years ago today, the Guardians of the Galaxy made their Marvel Universe debut! Read about the misfit crew and their adventures over the years: <a href="https://t.co/GpYsahaxJB">https://t.co/GpYsahaxJB</a></span></div>
+
+                                    </div>
+
+                                </div>    
+
+
+                                    <div class="chatlog__embed-footer">
+                                                <img class="chatlog__embed-footer-icon" src="https://abs.twimg.com/icons/apple-touch-icon-192x192.png" />
+                                        
+                                        <span class="chatlog__embed-footer-text">
+                                                    Twitter
+                                                    
+
+                                        </span>
+                                    </div>
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">11-Jan-19 08:11 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">oh nice</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">17-Jan-19 10:51 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.starwars.com/news/star-wars-age-of-rebellion">https://www.starwars.com/news/star-wars-age-of-rebellion</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.starwars.com/news/contributor/starwarsblog">StarWars.com Team</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.starwars.com/news/star-wars-age-of-rebellion"><span class="markdown">Marvel Celebrates Original Trilogy Icons with Star Wars: Age of Re...</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Original trilogy fans, these are the comics you&#39;re looking for.Marvel&#39;s Star Wars:&#160;Age of Rebellion, a special series of one-shots written by Greg Pak, will celebrate rebel princesses, Jedi Maste</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://starwarsblog.starwars.com/wp-content/uploads/2019/01/age-of-rebellion-tall.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://starwarsblog.starwars.com/wp-content/uploads/2019/01/age-of-rebellion-tall.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">17-Jan-19 03:50 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">its yoga</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">17-Jan-19 04:40 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">He looks like he&#39;s a blanket that needs ironing</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">17-Jan-19 05:35 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Now to wait between Feburay and March for Volume 4 which seems to be so popular that Amazon delivery dates are 1 to 3 months long</span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/445209228001411083/535512558094909460/20190117_173423.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/445209228001411083/535512558094909460/20190117_173423.jpg" />
+                            </a>
+                        </div>
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">17-Jan-19 05:38 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">nice</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">17-Jan-19 05:40 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I have 11 star wars comic volumes (and have Vader Part 4 coming by April and Age of Republic Heroes and Villians preordered)</span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/445209228001411083/535513875320143872/20190117_173948.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/445209228001411083/535513875320143872/20190117_173948.jpg" />
+                            </a>
+                        </div>
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">17-Jan-19 05:41 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">nice. may borrow some sometime</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jan-19 08:20 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">&quot;These aren&#39;t the comics you&#39;re looking for&quot;</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">21-Jan-19 08:27 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">they are</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">05-May-19 08:31 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://youtu.be/dt1MS1YmxyY">https://youtu.be/dt1MS1YmxyY</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCkB8yaUCyQ0iYFPQIRSzp4Q">Hero History</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://youtu.be/dt1MS1YmxyY"><span class="markdown">The Most Powerful Character in Marvel - The One Above All - Marvel...</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">The Most Powerful Character in the Marvel Universe. If you liked the video, be sure to like and subscribe for more videos like this one in the future! Email ...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/dt1MS1YmxyY/maxresdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/dt1MS1YmxyY/maxresdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">TIL thanos killed a universe by accident and asked god to bring it back</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">05-May-19 08:33 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">everyone knows that captain marvel is the most powerful with her super powerd vagina</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">25-May-19 10:26 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://youtu.be/baNP3o2XZJI">https://youtu.be/baNP3o2XZJI</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/user/MARVEL">Marvel Entertainment</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://youtu.be/baNP3o2XZJI"><span class="markdown">Marvel Size Chart: From Ant-Man to Giant-Man</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">See how your favorite Marvel Super Heroes measure up! ► Subscribe to Marvel: <a href="http://bit.ly/WeO3YJ">http://bit.ly/WeO3YJ</a> Follow Marvel on Twitter: ‪<a href="https://twitter.com/marvel">https://twitter.com/marvel</a> Like ...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/baNP3o2XZJI/maxresdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/baNP3o2XZJI/maxresdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Their channel is really good tbh so i thought id breathe life into this place</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">25-May-19 10:27 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Nice</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">31-May-19 07:59 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://youtu.be/qs493Gi4CaI">https://youtu.be/qs493Gi4CaI</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/user/MARVEL">Marvel Entertainment</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://youtu.be/qs493Gi4CaI"><span class="markdown">The Unbeatable Squirrel Girl in 2 Minutes - Marvel TL;DR</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">This week on Marvel TL;DR, Doreen Green (aka Squirrel Girl) fights an evil squirrel with mind control powers called Ratatoskr! And of course she wins! Becaus...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/qs493Gi4CaI/maxresdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/qs493Gi4CaI/maxresdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">31-May-19 07:59 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Oooo</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">02-Jun-19 12:45 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://youtu.be/zNv9xWxFX7E">https://youtu.be/zNv9xWxFX7E</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/user/dorkly">Dorkly</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://youtu.be/zNv9xWxFX7E"><span class="markdown">How Marvel Zombies Gave us the Purest Version of Spider-Man</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">DROPOUT.TV: No ads. No censors. Just funny. Join now. <a href="https://bit.ly/2TGKZDv">https://bit.ly/2TGKZDv</a> Available WORLDWIDE. App available in Canada, New Zealand, Australia and the U.S...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/zNv9xWxFX7E/maxresdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/zNv9xWxFX7E/maxresdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">02-Jun-19 12:45 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Oh Damn</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">02-Jun-19 12:47 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Its a good video</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">02-Jun-19 12:48 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Yea I&#39;m gonna watch it in about 6 mins</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">02-Jun-19 12:51 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i posted that ages ago</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">if you look at the channel history you will find it</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">02-Jun-19 12:55 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Oh oops. Its still good</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">02-Jun-19 12:57 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I think I&#39;ve posted the same thing twice on some occasions (such as in music)</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Damn some Dark Spider Man</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Nice</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">03-Jun-19 10:56 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://youtu.be/DFUSbYHo8C8">https://youtu.be/DFUSbYHo8C8</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCH3KlJ1S-2MfMB7V5TnKSxw">Superhero Movie Clip</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://youtu.be/DFUSbYHo8C8"><span class="markdown">Superman vs Flash and Wonder Woman - Fight Scene | Justice League ...</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Video Title: Superman vs Flash and Wonder Woman - Fight Scene | Justice League vs. Teen Titans HD Movie Clip. Buy it on Blu-Ray- Justice League vs Teen Titan...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/DFUSbYHo8C8/maxresdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/DFUSbYHo8C8/maxresdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">03-Jun-19 11:03 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Damn...</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Aww</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">08-Jun-19 08:42 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://youtu.be/l-Q4-zRp7VE">https://youtu.be/l-Q4-zRp7VE</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCxC9MfDAmBZ9VKORic6JK0A">NeedleMouse Productions</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://youtu.be/l-Q4-zRp7VE"><span class="markdown">Everytime Batman Has Gotten Super Powers (1939 - 2018)</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">A combination of every time batman has ever had super powers in comics, TV series and Movies. From his creation in 1939 to 2018. Every Time Batman Has Wielde...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/l-Q4-zRp7VE/hqdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/l-Q4-zRp7VE/hqdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">16-Jun-19 10:46 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://youtu.be/2FbcRoZk5zs">https://youtu.be/2FbcRoZk5zs</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/user/l0ky86">Flashback FM</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://youtu.be/2FbcRoZk5zs"><span class="markdown">WW &amp; Flash pokes out the eyes of Darkseid | Justice League: War</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Justice League: War (2014) WW &amp; Flash pokes out the eyes of Darkseid Subtitles: English, French, Russian Film discription :The world&#39;s finest heroes found th...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/2FbcRoZk5zs/maxresdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/2FbcRoZk5zs/maxresdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">16-Jun-19 10:51 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Damn</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">21-Jun-19 02:49 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">avengers endgame hashtag used..</span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/445209228001411083/591625706572742695/Screenshot_20190621-144844_YouTube.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/445209228001411083/591625706572742695/Screenshot_20190621-144844_YouTube.jpg" />
+                            </a>
+                        </div>
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><strong>h m m m m</strong></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jun-19 02:49 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><img class="emoji emoji--large" alt="🤔" title="🤔" src="https://twemoji.maxcdn.com/2/72x72/1f914.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">06-Jul-19 10:31 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://youtu.be/YVdKq3AkfJ8">https://youtu.be/YVdKq3AkfJ8</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/user/ihebby">Jeff Boschmann</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://youtu.be/YVdKq3AkfJ8"><span class="markdown">Wolverine is a Christian</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">From the original (90&#39;s) XMEN animated series While on vacation Rogue, Gambit, and Wolverine get into a skiing accident and take refuge in a monastery. Here ...</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/YVdKq3AkfJ8/hqdefault.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/YVdKq3AkfJ8/hqdefault.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 07:50 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">one thing that annoyed me about comics was i got into batgirl in new 52</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">they had an artstyle i really liked from issue 44 onwards</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jul-19 07:50 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Nice</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 07:50 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">but then they only did up to 52</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">then they basically rebooted everything</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jul-19 07:51 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Ah, I&#39;ve only got Star Wars ones</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 07:51 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">need to look up what happened with it</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">basically seems like comics reboot themselves every now and then</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">marvel and DC that is at least</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i know theres some with star wars but i think thats due to different rights and all that</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jul-19 07:52 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I think its because I wanted to Read Son of Dathomir as I doubted we would get that in the Clone Wars Revival and it seems like I am right</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 07:53 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">ah</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i&#39;ll get some pics later of the batgirl artstyle</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">and its like</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">it was halfway through a story kinda</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">or building up</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">and they rebooted it</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">changed the artstyle</span>
+
+                                <span class="chatlog__edited-timestamp" title="21-Jul-19 07:56 PM">(edited)</span>
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">and the story</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jul-19 07:58 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Damn that does sound annoying, reminds me of when Clone Wars was replaced with Rebels</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 07:58 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">LOL YES</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i much prefered clone wars graphics</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i never got into rebels properly</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">site i was streaming on didn&#39;t have start of season 2</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i think i watched season 1</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jul-19 07:58 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Rebels got to Clone Wars levels of Story telling come end of Season 2 Onwards</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I didn&#39;t mind the artstyle but still prefer Clone Wars&#39;</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 07:59 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">yea</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i remember me and my friend finding out fulcrom was ahsoka beforehand</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">cause we edited the voices and that and found it out</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:00 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Neat, it actually works?</span>
+
+                                <span class="chatlog__edited-timestamp" title="21-Jul-19 08:00 PM">(edited)</span>
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">So they actually took Ashley&#39;s voice and changed it so you could reverse enginere it back, Nice</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:01 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">im pretty sure</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:01 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I think it was a good surpise tho</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:01 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">we changed it and kept going back and forth on whether it was a guy or a girl</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:01 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Thats the only reason I started watching Rebels</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:01 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">then we figured out it was a girl</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">basically pitch changed</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:01 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Because I found out Ahsoka was in it</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:02 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">lol</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:02 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Damn I wanna get an episode and do that</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Now I have all four seasons on Blu-Ray</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:02 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">it was something like that anyway</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:02 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Neat</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:02 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">when she came on it was like I FLIPPING KNEW IT</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:03 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">The episodes where she confronts Vader are the best of the show</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Twlight of the Apprentice</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">It also has another Character in it from Clone Wars</span>
+
+                                <span class="chatlog__edited-timestamp" title="21-Jul-19 08:03 PM">(edited)</span>
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">And I don&#39;t mean Rex</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Who is also in it</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:04 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">ok</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i think i know hondo is in it</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:05 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Yea</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I wish Cad Bane was but I&#39;m pretty sure he&#39;s dead</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">If only They would finish that arc and release it</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">21-Jul-19 08:09 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">:/</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+</div>
+
+</body>
+</html>

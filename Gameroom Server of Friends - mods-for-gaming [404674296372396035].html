@@ -1,0 +1,3460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Gameroom Server of Friends - mods-for-gaming</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <style>
+        /* === GENERAL === */
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, Monospace;
+}
+
+.pre--multiline {
+    margin-top: 4px;
+    padding: 8px;
+    border: 2px solid;
+    border-radius: 5px;    
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+}
+
+.mention {
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.45em;
+    height: 1.45em;
+    margin: 0 1px;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1rem;
+    height: 1rem;
+}
+
+.emoji--large {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* === INFO === */
+
+.info {
+    display: flex;
+    max-width: 100%;
+    margin: 0 5px 10px 5px;    
+}
+
+.info__guild-icon-container {
+    flex: 0;
+}
+
+.info__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.info__metadata {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.info__guild-name {
+    font-size: 1.4em;
+}
+
+.info__channel-name {
+    font-size: 1.2em;
+}
+
+.info__channel-topic {
+    margin-top: 2px;
+}
+
+.info__channel-message-count {
+    margin-top: 2px;
+}
+
+.info__channel-date-range {
+    margin-top: 2px;
+}
+
+/* === CHATLOG === */
+
+.chatlog {
+    max-width: 100%;
+    margin-bottom: 24px;
+}
+
+.chatlog__message-group {
+    display: flex;
+    margin: 0 10px;
+    padding: 15px 0;
+    border-top: 1px solid;
+}
+
+.chatlog__author-avatar-container {
+    flex: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    flex: 1;
+    min-width: 50%;
+    margin-left: 20px;
+}
+
+.chatlog__author-name {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 5px;
+    font-size: .75em;
+}
+
+.chatlog__content {
+    padding-top: 5px;
+    font-size: .9375em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 3px;
+    font-size: .8em;
+}
+
+.chatlog__attachment {
+    margin: 5px 0;
+}
+
+.chatlog__attachment-thumbnail {
+    max-width: 50%;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    max-width: 520px;
+    margin-top: 5px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 4px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    width: 100%;
+    display: flex;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.chatlog__embed-author-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 9px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 10px;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-size: .875em;
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 20px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 10px;
+}
+
+.chatlog__embed-image {    
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 10px;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-weight: 600;
+    font-size: .75em;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 6px 2px 2px 2px;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 6px;
+    font-size: .875em;
+}
+    </style>
+    <style>
+        /* === GENERAL === */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #839496 !important;
+}
+
+.mention {
+    color: #7289da;
+}
+
+/* === INFO === */
+
+.info__guild-name {
+    color: #ffffff;
+}
+
+.info__channel-name {
+    color: #ffffff;
+}
+
+.info__channel-topic {
+    color: #ffffff;
+}
+
+/* === CHATLOG === */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</head>
+<body>
+    
+<div class="info">
+    <div class="info__guild-icon-container">
+        <img class="info__guild-icon" src="https://cdn.discordapp.com/icons/269812107355226122/a_f10b9bc882749f647caf9ea4205c450c.png" />
+    </div>
+    <div class="info__metadata">
+        <div class="info__guild-name">Gameroom Server of Friends</div>
+        <div class="info__channel-name">mods-for-gaming</div>
+        
+            <div class="info__channel-topic">A general chat for (gaming) Mods, i.e. Skyrim, Oblivion, Fallout etc</div>
+
+        <div class="info__channel-message-count">164 messages</div>
+        
+    </div>
+</div>
+
+<div class="chatlog">
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">21-Jan-18 08:50 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">found this on the oblivion nexus its quite good <a href="https://www.nexusmods.com/oblivion/mods/39801?tab=description">https://www.nexusmods.com/oblivion/mods/39801?tab=description</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/oblivion/mods/39801?tab=description"><span class="markdown">Wiedergaenger Race REANIMATED EV DV</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">A Wiedergaenger or Revenant is a human being that died violently, and is raised either by a mage, or by its own will, to fulfill revenge on its murderer.
+
+This mod contains not only a race</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/101/images/thumbnails/39801-2-1315046335.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/101/images/thumbnails/39801-2-1315046335.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">13-Feb-18 03:22 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/oblivion/mods/44337">https://www.nexusmods.com/oblivion/mods/44337</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/oblivion/mods/44337"><span class="markdown">Oblivion - Enhanced Camera</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">This is an obse plugin that enables a visible body when in first person. Also, any points where the game force switches to 3rd person (sitting, death, etc) are now in 1st person.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/101/images/thumbnails/44337-1-1400221421.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/101/images/thumbnails/44337-1-1400221421.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/272496312115527680/d9135a28af1635d10781c7abf2aeb6aa.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="&#119868;&#120001;&#120001;&#120007;&#119990;#2170">&#119868;&#120001;&#120001;&#120007;&#119990;</span>
+                <span class="chatlog__timestamp">24-Mar-18 11:59 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">If you play Doki Doki Literature Club, I recommend you to download the &quot;Our Time&quot; mod <a href="https://www.reddit.com/r/DDLCMods/comments/7xj3yj/ddlc_our_time_demo_release/">https://www.reddit.com/r/DDLCMods/comments/7xj3yj/ddlc_our_time_demo_release/</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,255,255,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.reddit.com/r/DDLCMods/comments/7xj3yj/ddlc_our_time_demo_release/"><span class="markdown">DDLC &quot;Our Time&quot; - Demo release! • r/DDLCMods</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Hey! I&#39;m a bit nervous about it, but this is the demo for &quot;Our Time&quot;! <strong>Synopsis</strong>: After finishing the game, you decide to bring Monika back....</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.redditmedia.com/BPatjmqy2e99-CQBloN84j8EptRPDXPkKCGuwG5cIcY.jpg?w=216&s=fb6dd9be0637f534e61f19a1c13a0951">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.redditmedia.com/BPatjmqy2e99-CQBloN84j8EptRPDXPkKCGuwG5cIcY.jpg?w=216&s=fb6dd9be0637f534e61f19a1c13a0951" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Its a demo</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
+                <span class="chatlog__timestamp">31-Mar-18 10:09 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="http://steamcommunity.com/sharedfiles/filedetails/?id=1341416446">http://steamcommunity.com/sharedfiles/filedetails/?id=1341416446</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
+                <span class="chatlog__timestamp">25-Apr-18 05:46 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1121050940&searchtext=big+smoke">https://steamcommunity.com/sharedfiles/filedetails/?id=1121050940&amp;searchtext=big+smoke</a>
+best addon ever</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/272496312115527680/d9135a28af1635d10781c7abf2aeb6aa.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="&#119868;&#120001;&#120001;&#120007;&#119990;#2170">&#119868;&#120001;&#120001;&#120007;&#119990;</span>
+                <span class="chatlog__timestamp">01-May-18 02:07 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="BAZINGA#6594">@BAZINGA</span> <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1374444876&searchtext=">https://steamcommunity.com/sharedfiles/filedetails/?id=1374444876&amp;searchtext=</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:27 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/skyrim/mods/62574">https://www.nexusmods.com/skyrim/mods/62574</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/62574"><span class="markdown">Feminine Argonian Textures (Chameleon and Lizard)</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">This is a retexture for the Argonian female, it will make your Argonian looks more feminine.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/62574-0-1480048972.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/62574-0-1480048972.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:30 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">that dont make sense</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:31 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">whys that</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:31 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">lizards and reptiles dont have tits</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:32 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">what you are talking about are real life ones and you might not have noticed that with or with out the mod the argonions have tits</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:33 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">But they lay eggs don&#39;t they?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:34 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">probably</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:34 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">they do</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I just googled it</span>
+
+                                <span class="chatlog__edited-timestamp" title="21-Jul-18 06:34 PM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:34 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">hey if you want to argue about it talk to todd howard</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:34 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Fuckin Todd</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:35 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">idk if they dont need them</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i like lizard people</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:35 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">they don&#39;t</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:35 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">as i said i dont care</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention">@Mods</span>  can one of you delete this convo because this channel is just for mod links</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:38 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">or you could just scroll up</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:38 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">nope. its a good coversation that spawned from it</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">or repost the mod if thats the issue</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:38 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">well no because it inconvinient to have to schroll up on a channel just for links</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">also the chat was about tits</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:39 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/skyrim/mods/62574">https://www.nexusmods.com/skyrim/mods/62574</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/62574"><span class="markdown">Feminine Argonian Textures (Chameleon and Lizard)</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">This is a retexture for the Argonian female, it will make your Argonian looks more feminine.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/62574-0-1480048972.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/62574-0-1480048972.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:39 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">dont nick my post</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:39 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">stop complaining</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:39 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">you post it adam and ill remove wills</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">21-Jul-18 06:40 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">fuck off dan i can complain all i want</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">21-Jul-18 07:15 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Nnnnnn convos are fine</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">21-Jul-18 07:15 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">well done marcus. 1/2 an hour after the fact and ive stated its fine you state its fine as well, clap clap clap <img class="emoji " alt="😛" title="😛" src="https://twemoji.maxcdn.com/2/72x72/1f61b.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">21-Jul-18 07:22 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Just</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Just my opinion</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">And i got pinged</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">This looks pettyyyyy</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 03:50 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/skyrim/mods/87809?tab=description&BH=4">https://www.nexusmods.com/skyrim/mods/87809?tab=description&amp;BH=4</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/87809?tab=description&BH=4"><span class="markdown">Fall From Grace</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Add a set of new robe, craftable,upgradeable.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/87809/87809-1510318810-620931681.jpeg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/87809/87809-1510318810-620931681.jpeg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">28-Jul-18 03:50 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">they all look ugly and uncomfortable</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 03:51 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">they are amazing</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">28-Jul-18 03:52 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">my skyrim keeps crashing</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 03:52 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">lol</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/skyrim/mods/13542">https://www.nexusmods.com/skyrim/mods/13542</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/13542"><span class="markdown">Gifted Armor</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">A new steel armor set.Female only</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/13542-1-1332537590.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/13542-1-1332537590.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">the made a fate armour</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">28-Jul-18 03:52 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">that looks almost as ugly</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 03:53 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i looks like sabers armour</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">28-Jul-18 03:53 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">becase it is</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 03:53 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">also its an old mod</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">it was made in 2013 dude what do you expect</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">28-Jul-18 03:54 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">let the later one you sent prior looks like barbed wire</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 03:54 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">its like tendrils that have coverd the body</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/skyrim/mods/11550">https://www.nexusmods.com/skyrim/mods/11550</a> how about this one</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/11550"><span class="markdown">Saber Dress by Hentai</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">release date : February 2012
+Category: Armor
+Armor rating: Medium
+Body: Doesn&#39;t matter
+Mod version : !.0
+Author: Hentai</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/11550-1-1330413611.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/11550-1-1330413611.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
+                <span class="chatlog__timestamp">28-Jul-18 03:59 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Eh, I don&#39;t really like those, and in 2013 armours like this were made, so <img class="emoji " alt="🤷" title="🤷" src="https://twemoji.maxcdn.com/2/72x72/1f937.png" /> <a href="https://www.nexusmods.com/skyrim/mods/31229">https://www.nexusmods.com/skyrim/mods/31229</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/31229"><span class="markdown">Medusa Drakul armors and Thanatos dragon</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">This mod add 2 new set of High Resolution heavy Armor to the game(The Medusa Armor is Female Only and the Drakul Male Only) as well as a new dragon.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/31229-1-1360329984.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/31229-1-1360329984.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:01 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/skyrim/mods/80163">https://www.nexusmods.com/skyrim/mods/80163</a> i love this</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/80163"><span class="markdown">Adia Star&#39;s Imperial Goddess</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">REVEAL THE GODDES IN YOU using this expansion of Ashara&#39;s Imperial Outfit.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/80163-21-1478918123.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/80163-21-1478918123.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:03 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">for some reason it reminds me about those cartoon cavemen dresses, i&#39;m not entirely sure why <img class="emoji " alt="😂" title="😂" src="https://twemoji.maxcdn.com/2/72x72/1f602.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:03 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">its based on roman clothing</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">cavemen wear furs</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:05 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Idk, they just look similar in my mind for some reason</span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/404674296372396035/472781725051912192/unknown.png">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/404674296372396035/472781725051912192/unknown.png" />
+                            </a>
+                        </div>
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:05 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">lol</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:05 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">no</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">also nobody uses that colour</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">the white one is nice and you can see the stiching</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/skyrim/mods/63623">https://www.nexusmods.com/skyrim/mods/63623</a> ok this looks good</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/63623"><span class="markdown">Artifacts - The Ice Blade Of The Monarch</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">The coolest and coldest artifact makes its return to Skyrim: Including Ice Blade of the Monarch, Krahvalok (Dagger) and Apotheosis (Staff). High quality models and textures available at 4k</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/63623/63623-1512684642-1111838033.jpeg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/63623/63623-1512684642-1111838033.jpeg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:13 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">yeah, thats good looking, reminds me of the LOTR weapon pack</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:13 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/skyrim/mods/3819">https://www.nexusmods.com/skyrim/mods/3819</a>.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:15 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">can&#39;t forget <a href="https://www.nexusmods.com/skyrim/mods/35399">https://www.nexusmods.com/skyrim/mods/35399</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/35399"><span class="markdown">Book Covers Skyrim</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Book Covers Skyrim is a retexture of all the readable books, journals, and notes in Skyrim. It gives each book and journal its own unique cover and adds many additional paper styles to the notes.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/35399-1-1376557557.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/35399-1-1376557557.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:15 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">lol</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:16 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">god, this made me reopen NMM and have a look at all my old mods...</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">197 Mods, and none of them are installed, going to have to guess which ones I used to play together XD</span>
+
+                                <span class="chatlog__edited-timestamp" title="28-Jul-18 04:17 PM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:18 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">what body mod do you use</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">cbbe,unp or 7base</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:18 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">CBBE is the one I usually use</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:18 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i use unp</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/skyrim/mods/36425">https://www.nexusmods.com/skyrim/mods/36425</a> like this</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/36425"><span class="markdown">Real Girls Realistic Body Texture for UNP UNPB and SeveNBase - WIP</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Photo-realistic body and face textures for Skyrim. - ALPHA VERSION WIP</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/36425-1-1371680509.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/36425-1-1371680509.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:32 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/skyrim/mods/774">https://www.nexusmods.com/skyrim/mods/774</a> where has this been all my life</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/774"><span class="markdown">Killable Children</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Allows the children of Skyrim to die. Affects the Breton, Imperial, Nord and Redguard children.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/774-2-1321786876.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/774-2-1321786876.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:35 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">its probably one of the most subscribed mods in existence at this point</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:35 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">yeah</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">thats and mods that give things tits</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
+                <span class="chatlog__timestamp">28-Jul-18 04:36 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">oh, I remember this mod, it was one of my favourites <a href="https://www.nexusmods.com/skyrimspecialedition/mods/8856">https://www.nexusmods.com/skyrimspecialedition/mods/8856</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrimspecialedition/mods/8856"><span class="markdown">DCR - King Crusader Mega Pack</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Installs the DCR - King Crusader Armor, Locust Spell, and Blade Set Reloaded.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/1704/images/thumbnails/82543-11-1488628312.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/1704/images/thumbnails/82543-11-1488628312.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">29-Jul-18 10:11 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/skyrim/mods/38326?tab=description">https://www.nexusmods.com/skyrim/mods/38326?tab=description</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/38326?tab=description"><span class="markdown">Seranaholic</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">This Mod changes the appearance of Serana.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/38326-0-1491245281.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/38326-0-1491245281.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">30-Jul-18 04:55 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/skyrim/mods/73236">https://www.nexusmods.com/skyrim/mods/73236</a> dont know if its just me but i need this</span>
+
+                                <span class="chatlog__edited-timestamp" title="30-Jul-18 04:55 PM">(edited)</span>
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/73236"><span class="markdown">Simply Knock</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Simply Knock is the first feature-complete mod that allows you to knock on locked doors of houses in Skyrim.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/73236-1-1454691893.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/73236-1-1454691893.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/skyrim/mods/67595">https://www.nexusmods.com/skyrim/mods/67595</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/67595"><span class="markdown">Celes Nightingale Armor UUNP - CBBE</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">A new craftable light Daedric armor, sword, dagger, bow and crossbow with/out poisonous arrows and bolts.
+
+Available for UNP, UUNP BodySlide, CBBE, CBBE HDT, CBBE BodySlide.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/67595-0-1439974291.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/67595-0-1439974291.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:17 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="Andromeda#5665">@Andromeda</span> I have had the worse experience in Skyrim ever!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:17 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">What happened</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:18 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I never thought I&#39;d say this but I never want to see Lydia&#39;s breasts for at least a week</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:18 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Lol</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:18 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">fuck that was diffacult to fix</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:18 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">What happened to them</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:18 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">NEVER USE UFO FOLLOER MOD</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:19 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">What is that</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:19 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Her Default Armour was removed from her so when she goes home she decides to strip down like its no big deal</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">It took me two bloody hours to fix it</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:20 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Lol</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Well id love that</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:20 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I bet you would</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I finally got a mod to reset her armor because I overlooked that possibility</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:21 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">The wierd things is my games is glitched so random people have no clothes so it&#39;s strange when I go to a orc string hold and everyone except the chiefs favourite wife is naked</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:24 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">that is very strange</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">01-Aug-18 08:24 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Yeah</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Especially when I have a mod that makes the female orc skins really soft and nice looking</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">06-Aug-18 06:57 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/fallout4/mods/31336">https://www.nexusmods.com/fallout4/mods/31336</a> this looks amazing</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/fallout4/mods/31336"><span class="markdown">CROSS_Cryolance</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/1151/images/thumbnails/31336/31336-1525251090-2065807475.jpeg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/1151/images/thumbnails/31336/31336-1525251090-2065807475.jpeg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">10-Aug-18 06:52 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/fallout4/mods/3999/">https://www.nexusmods.com/fallout4/mods/3999/</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/fallout4/mods/3999/"><span class="markdown">Smaller Institute Weapons</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Changes mesh/model of the Institute Rifle to be smaller</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/1151/images/thumbnails/3999-0-1449005627.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/1151/images/thumbnails/3999-0-1449005627.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/240786457214582784/4034b30b7c2ee659e157ed391f6ae91a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Toby Echozap#3346">Toby Echozap</span>
+                <span class="chatlog__timestamp">10-Aug-18 06:53 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">ah.intersting</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">10-Aug-18 06:53 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">those guns are too big im my opinnion and thats the reason why i dont like using them</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">12-Aug-18 11:47 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/fallout4/mods/32025">https://www.nexusmods.com/fallout4/mods/32025</a> cant understand why i havent installed this yet</span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/fallout4/mods/32025"><span class="markdown">Pip Boy 2000</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">A pipboy replacer based off Pip Boy 2000</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/1151/images/thumbnails/32025/32025-1527536085-139320058.png">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/1151/images/thumbnails/32025/32025-1527536085-139320058.png" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">13-Aug-18 07:42 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.nexusmods.com/fallout4/mods/27945">https://www.nexusmods.com/fallout4/mods/27945</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/fallout4/mods/27945"><span class="markdown">Commonwealth Prosthetics - Synthetic Arm</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Adds 3 new female only armors featuring a gen 2 synth right arm.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/1151/images/thumbnails/27945-0-1510706544.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/1151/images/thumbnails/27945-0-1510706544.jpg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">25-Aug-18 11:52 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="BAZINGA#6594">@BAZINGA</span> <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1486851605">https://steamcommunity.com/sharedfiles/filedetails/?id=1486851605</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">25-Aug-18 11:53 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">who gets mods from the workshop</span>
+
+                                <span class="chatlog__edited-timestamp" title="25-Aug-18 11:53 PM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">25-Aug-18 11:53 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I check it every so often</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">25-Aug-18 11:53 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">they have the worst ones though</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">i check nexus and loverslab</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Anska#5126">Anska</span>
+                <span class="chatlog__timestamp">26-Aug-18 12:16 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I use Nexus Mods all the time</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
+                <span class="chatlog__timestamp">26-Aug-18 12:28 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">yeah... after pressured immensely, do you still think you should only play the game as designed? XD</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Anska#5126">Anska</span>
+                <span class="chatlog__timestamp">26-Aug-18 05:59 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Yes</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">My games have never been as functional as before I modded them except Skyrim and Oblivion</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
+                <span class="chatlog__timestamp">26-Aug-18 06:04 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">you just choose the wrong mods to play with</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
+                <span class="chatlog__timestamp">27-Aug-18 02:14 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://dl.orangedox.com/sNZ5oquQ19u7CH31rr">https://dl.orangedox.com/sNZ5oquQ19u7CH31rr</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
+                <span class="chatlog__timestamp">27-Aug-18 02:22 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">^ a mod for civ 5, of which we will be playing with</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">as it balances out the game and stuff</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
+                <span class="chatlog__timestamp">27-Aug-18 02:47 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="suspicious#8012">@suspicious</span></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">^</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/180005256422359040/212dbb05e194d45f2bda7ec25493b033.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Helios_Sol#1155">Helios_Sol</span>
+                <span class="chatlog__timestamp">30-Aug-18 11:57 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1403387272">https://steamcommunity.com/sharedfiles/filedetails/?id=1403387272</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">30-Aug-18 12:07 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">....</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">30-Aug-18 12:08 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I don&#39;t like dokie doki the characters design have no depth and are really flat and ugly in my opinion</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/272496312115527680/d9135a28af1635d10781c7abf2aeb6aa.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="&#119868;&#120001;&#120001;&#120007;&#119990;#2170">&#119868;&#120001;&#120001;&#120007;&#119990;</span>
+                <span class="chatlog__timestamp">28-Sep-18 03:34 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=80443904&searchtext=map">https://steamcommunity.com/sharedfiles/filedetails/?id=80443904&amp;searchtext=map</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
+                <span class="chatlog__timestamp">28-Sep-18 03:46 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://www.reddit.com/r/nqmod/comments/8qqp4d/nqmod_v130_or_something/">https://www.reddit.com/r/nqmod/comments/8qqp4d/nqmod_v130_or_something/</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,255,255,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.reddit.com/r/nqmod/comments/8qqp4d/nqmod_v130_or_something"><span class="markdown">r/nqmod - NQmod v13.0 (or something)</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">64 votes and 103 comments so far on Reddit</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://i.redditmedia.com/vNLmKLmv2XYgCsfbrz1ej_ASV6GS-hTT5XlxOJiKbWw.jpg?s=074ba81ad8c0563a725115f634c229fe">
+                                                <img class="chatlog__embed-thumbnail" src="https://i.redditmedia.com/vNLmKLmv2XYgCsfbrz1ej_ASV6GS-hTT5XlxOJiKbWw.jpg?s=074ba81ad8c0563a725115f634c229fe" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">30-Sep-18 07:50 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Ah shit <a href="https://www.nexusmods.com/skyrim/mods/93709">https://www.nexusmods.com/skyrim/mods/93709</a></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(79,84,92,255)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.nexusmods.com/skyrim/mods/93709"><span class="markdown">Peacekeeper Armour</span></a>
+                                            </div>
+
+                                        <div class="chatlog__embed-description"><span class="markdown">This mod adds a new armour set to Skyrim based on the Peacekeeper from For Honour.</span></div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/93709/93709-1537293946-857982217.jpeg">
+                                                <img class="chatlog__embed-thumbnail" src="https://staticdelivery.nexusmods.com/mods/110/images/thumbnails/93709/93709-1537293946-857982217.jpeg" />
+                                            </a>
+                                        </div>
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">30-Sep-18 07:58 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">good shit but the one with the pattern is better</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/272496312115527680/d9135a28af1635d10781c7abf2aeb6aa.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="&#119868;&#120001;&#120001;&#120007;&#119990;#2170">&#119868;&#120001;&#120001;&#120007;&#119990;</span>
+                <span class="chatlog__timestamp">03-Oct-18 09:19 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/workshop/filedetails/?id=1524117470">https://steamcommunity.com/workshop/filedetails/?id=1524117470</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/272496312115527680/d9135a28af1635d10781c7abf2aeb6aa.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="&#119868;&#120001;&#120001;&#120007;&#119990;#2170">&#119868;&#120001;&#120001;&#120007;&#119990;</span>
+                <span class="chatlog__timestamp">04-Oct-18 08:27 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=910637639&searchtext=">https://steamcommunity.com/sharedfiles/filedetails/?id=910637639&amp;searchtext=</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/272496312115527680/d9135a28af1635d10781c7abf2aeb6aa.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="&#119868;&#120001;&#120001;&#120007;&#119990;#2170">&#119868;&#120001;&#120001;&#120007;&#119990;</span>
+                <span class="chatlog__timestamp">05-Oct-18 01:03 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1472110503">https://steamcommunity.com/sharedfiles/filedetails/?id=1472110503</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/272496312115527680/d9135a28af1635d10781c7abf2aeb6aa.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="&#119868;&#120001;&#120001;&#120007;&#119990;#2170">&#119868;&#120001;&#120001;&#120007;&#119990;</span>
+                <span class="chatlog__timestamp">05-Oct-18 01:57 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=795516655&searchtext=ak47">https://steamcommunity.com/sharedfiles/filedetails/?id=795516655&amp;searchtext=ak47</a></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/workshop/filedetails/?id=373048945">https://steamcommunity.com/workshop/filedetails/?id=373048945</a></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">IGN rates this mod 10/10</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
+                <span class="chatlog__timestamp">05-Oct-18 01:58 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">yum</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">06-Oct-18 12:28 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1526127534">https://steamcommunity.com/sharedfiles/filedetails/?id=1526127534</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/272496312115527680/d9135a28af1635d10781c7abf2aeb6aa.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="&#119868;&#120001;&#120001;&#120007;&#119990;#2170">&#119868;&#120001;&#120001;&#120007;&#119990;</span>
+                <span class="chatlog__timestamp">06-Oct-18 04:10 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1494274936">https://steamcommunity.com/sharedfiles/filedetails/?id=1494274936</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">06-Oct-18 04:31 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">oh for heaven sakes</span>
+
+                                <span class="chatlog__edited-timestamp" title="06-Oct-18 04:31 PM">(edited)</span>
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/404674296372396035/498155270363414528/20181006162927_1.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/404674296372396035/498155270363414528/20181006162927_1.jpg" />
+                            </a>
+                        </div>
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/210303789016547328/6a0e365b74c2b145b0757ae6888da4b2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Andromeda#5665">Andromeda</span>
+                <span class="chatlog__timestamp">06-Oct-18 04:31 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">k</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/487304087877189634/ba568ba08ef8f9e65c74b1bdeabf4ba4.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="&#128420;AmeliaTheSpookster&#128420;#5792">&#128420;AmeliaTheSpookster&#128420;</span>
+                <span class="chatlog__timestamp">06-Oct-18 08:53 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">xD</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/272496312115527680/d9135a28af1635d10781c7abf2aeb6aa.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="&#119868;&#120001;&#120001;&#120007;&#119990;#2170">&#119868;&#120001;&#120001;&#120007;&#119990;</span>
+                <span class="chatlog__timestamp">15-Oct-18 09:00 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1535656567">https://steamcommunity.com/sharedfiles/filedetails/?id=1535656567</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/272496312115527680/d9135a28af1635d10781c7abf2aeb6aa.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="&#119868;&#120001;&#120001;&#120007;&#119990;#2170">&#119868;&#120001;&#120001;&#120007;&#119990;</span>
+                <span class="chatlog__timestamp">18-Oct-18 12:59 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1538028132&searchtext=">https://steamcommunity.com/sharedfiles/filedetails/?id=1538028132&amp;searchtext=</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/324268117683470337/8b04ba365169a182ae7f2f5aa8d2eada.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="TrueBlackRadio#2639">TrueBlackRadio</span>
+                <span class="chatlog__timestamp">14-Dec-18 10:50 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1586218238">https://steamcommunity.com/sharedfiles/filedetails/?id=1586218238</a></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
+                <span class="chatlog__timestamp">23-Jan-19 09:14 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1633293625">https://steamcommunity.com/sharedfiles/filedetails/?id=1633293625</a></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">da</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">g</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">chat wont load</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/239824629361934336/1209b7c289406b6cd8a7e3aaf5e5d59a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Edward Teaington Pennyworth#8065">Edward Teaington Pennyworth</span>
+                <span class="chatlog__timestamp">18-Mar-19 11:39 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/404674296372396035/557166249776513024/image0.jpg">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/404674296372396035/557166249776513024/image0.jpg" />
+                            </a>
+                        </div>
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">18-Mar-19 11:40 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">What is it replacing? Lava?</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/286824461598982144/a_fb4b41f08aa778b5870bdd8895797916.gif" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Anska#5126">Anska</span>
+                <span class="chatlog__timestamp">18-Mar-19 11:42 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I guess so</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Unless...</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Oh no... Not water... Don&#39;t turn the oceans!</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/101733558753718272/c1b682b5b67894d3f1189478ab60510e.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Inteon#7976">Inteon</span>
+                <span class="chatlog__timestamp">18-Mar-19 11:54 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">NO</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">pls</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">no more beans</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/293096300281593857/81c6ab0e98e671c699fe0f11aaa592fd.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DoIlikeyou#1024">DoIlikeyou</span>
+                <span class="chatlog__timestamp">18-Mar-19 12:12 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">It genuinely hurts my eyes</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/137630525509730304/cca3a093d8ab59ca5c5f6177da06e6af.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Phantom Knight#6440">Phantom Knight</span>
+                <span class="chatlog__timestamp">18-Mar-19 04:43 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">whats with you and beans</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/461193832151646228/f79b7994c236a2e5ce825c1ceeede4da.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="DDale1357#3271">DDale1357</span>
+                <span class="chatlog__timestamp">18-Mar-19 04:46 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">IKR</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/239824629361934336/1209b7c289406b6cd8a7e3aaf5e5d59a.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Edward Teaington Pennyworth#8065">Edward Teaington Pennyworth</span>
+                <span class="chatlog__timestamp">19-Mar-19 05:58 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/404674296372396035/557442787939844096/image0.png">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/404674296372396035/557442787939844096/image0.png" />
+                            </a>
+                        </div>
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208140382892982272/ba7bcb63b7f44958dfbea9f813f8c344.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="magPlex#4639">magPlex</span>
+                <span class="chatlog__timestamp">19-Mar-19 07:33 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">N o</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Oh no it&#39;s worse the more I look</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/137630525509730304/cca3a093d8ab59ca5c5f6177da06e6af.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Phantom Knight#6440">Phantom Knight</span>
+                <span class="chatlog__timestamp">19-Mar-19 08:01 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">lol</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+</div>
+
+</body>
+</html>
